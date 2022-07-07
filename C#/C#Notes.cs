@@ -22,7 +22,6 @@ ushort value = 12312; // Unsigned short - (+) small integer, size: 2 bytes
 int x = 5; // integer - (whole number), size: 4 bytes
 uint y = 65535; // Unsigned integer - a (+) whole number, size: 4 bytes
 
-
 long l = 5; // long - a large integer, size: 8 bytes
 ulong ul = 1151092; // Unsigned long -  a (+) large integer, size: 8 bytes
 
