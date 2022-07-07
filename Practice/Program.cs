@@ -2,39 +2,41 @@
 
 namespace Practice
 {
-    class Practice
+    class Program
     {
 
         static void Main(string[] args)
         {
             Console.Write("Please enter an integer: ");
-
             string response = Console.ReadLine(); // Console.ReadLine() returns a string
-            int num = int.Parse(response); // int.Parse(string) returns an int
-            // int number = int.Parse(Console.ReadLine());
 
-            calculate(num);
+            Calculator calc = new Calculator();
 
-        }
-
-        private static void calculate(int num)
-        {
-            // print every multiple of 3, between 1 and num
-            // find the highest number that is a multiple of 3
-
-            int start = num - (num % 3);
-
-            for (int i = start; i >= 3; i -= 3)
+            // try-catch is a graceful way to handle exceptions. Don't let your application crash, handle your exceptions!
+            try
             {
-                Console.WriteLine($"{i}");
+                // Don't force the parse and throw exceptions, try it first and if it works, then return true and set the variable n
+                // to the output. Otherwise return false.
+                // int n;
+                // if (int.TryParse(response, out n))
+                // {
+                //     calc.calculate(n);
+                // }
+                // else
+                // {
+                //     Console.WriteLine($"\"{response}\" is not an integer! =(");
+                // }
+
+                int num = int.Parse(response); // int.Parse(string) returns an int
+                // int number = int.Parse(Console.ReadLine());
+                calc.calculate(num);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"\"{response}\" is not an integer! =(");
             }
 
-            // Another way to perform this problem
-            // while (start >= 3)
-            // {
-            //     Console.WriteLine($"{start}");
-            //     start -= 3;
-            // }
+
         }
 
     }
