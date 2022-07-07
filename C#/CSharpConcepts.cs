@@ -131,12 +131,57 @@ namespace CSharpConcepts
                     Console.WriteLine("Default");
             }
 
+            // loops
+            // for loops, while loops, do-while loops, foreach loop
 
+            // for([initialization]; [condition]; [increment]){[code block]}
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i);
+            }
 
+            // while([condition]) {[code block]} - continues until condition is false
+            i = 0;
+            while (i < 10)
+            {
+                Console.Write(i);
+                i++;
+            }
 
+            // do{[code block]} while([condition]) - perform code block at least once
+            do
+            {
+                Console.WriteLine(i);
+                i++;
+            } while (i < 10);
 
+            // foreach([element type] [variable name] in [collection]){[code block]}
+            // Performs a function 
+            int array = { 1, 2, 3, 4, 5 };
+            foreach (int i in array)
+            {
+                Console.WriteLine(i);
+            }
 
         }
+
+        // method signature
+        private int AddValues(int a, int b)
+        {
+            return a + b;
+        }
+
+        // Object Oriented Programming
+        // Encapsulation - limit the access to attributes or methods from outside parties.
+        // Abstraction - hiding the details of how something works.
+        //  -   Feed it inputs, and know what kind of output to expect.
+        // Inheritance - creating new classes from existing classes. Can be described as an "IS-A" relationship. 
+        //  -   A child/sub/derived class "is a" parent/super/base class. A dog IS A animal.
+        //  -   Inherited class will receive all the members (fields and methods) of the parent class.
+        //  -   True multiple inheritance isn't possible in C#, however we can fake it through interfaces. 
+        // Polymorphism - taking on many forms, through method overloading and overriding
+        //  -   overloading - same method name, but with different # or type of parameters or a different return type
+        //  -   overriding - same method as the parent (or interface), but different functionality
 
     }
 
