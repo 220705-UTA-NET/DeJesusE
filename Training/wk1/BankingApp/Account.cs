@@ -2,6 +2,8 @@ using System;
 
 namespace BankingApp
 {
+    // Account could also be made abstract by replacing below with
+    // abstract class Account
     class Account
     {
         // Fields, or states
@@ -41,6 +43,9 @@ namespace BankingApp
 
             MakeDeposit(balance, "Initial Deposit");
         }
+
+        // public abstract method, must be overridden
+        // public virtual method, could be overridden
 
         // Methods
         public void MakeDeposit(decimal deposit, string note)
@@ -106,7 +111,7 @@ namespace BankingApp
             return display;
         }
 
-        // Must override the Object class
+        // Must override the Object class' ToString method
         public override string ToString()
         {
             string display = "###\n";

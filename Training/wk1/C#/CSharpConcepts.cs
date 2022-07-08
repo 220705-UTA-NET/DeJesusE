@@ -15,11 +15,14 @@ namespace CSharpConcepts
         // As a language, c# doesn't care about indentations, or whitespace in general
 
         // modifiers - 
-        //  private - limits access to the class to the class itself
+        //  private - limits access to the class itself
         //  static - limits access to the class to the class itself and the class's static methods
-        //  public - access is limited ot the class and all its members
-        //  internal - access is limited to the class and all of its members, but not to the class's static members
+        //  public - can be accessed from anywhere
+        //  internal - can be accessed by classes with the same assembly
         //  protected - access is limited to the class and all of its members, but not to the class's static members
+
+        // protected internal - combination of protected and internal
+        // private protected - combination of private and protected
 
         // modifiers are used to control access to members of a class
 
