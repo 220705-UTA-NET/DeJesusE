@@ -7,7 +7,8 @@ namespace BankingApp
         private double interestRate;
 
         // Constructor
-        public SavingsAccount(string fname, string lname, decimal balance, double interestRate) : base(fname, lname, balance)
+        public SavingsAccount(string fname, string lname, decimal balance, double interestRate = 0.0003f)
+                       : base(fname, lname, balance)
         {
             this.interestRate = interestRate;
         }
@@ -16,7 +17,7 @@ namespace BankingApp
         public void AddInterest()
         {
             decimal payment = (this.balance * ((decimal)this.interestRate));
-            this.MakeDeposit(payment);
+            this.MakeDeposit(payment, "Interest Payment");
         }
 
     }

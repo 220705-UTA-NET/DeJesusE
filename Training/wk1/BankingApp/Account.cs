@@ -7,11 +7,14 @@ namespace BankingApp
         // Fields, or states
 
         public int accountNumber { get; set; }
+        // Same as
         // private int accountNumber;
+        // public get() { return this.accountNumber}
+        // public set(int accountNumber){this.accountNumber=accountNumber}
         private string fName;
         private string lName;
         protected decimal balance;
-        private List<string> logs;
+        private List<Transaction> logs;
 
 
         // There is only one accountNumberSeed for objects created from Account and it is shared
@@ -34,13 +37,13 @@ namespace BankingApp
 
             this.fName = fName;
             this.lName = lName;
-            this.logs = new List<string>();
+            this.logs = new List<Transaction>();
 
-            MakeDeposit(balance);
+            MakeDeposit(balance, "Initial Deposit");
         }
 
         // Methods
-        public void MakeDeposit(decimal deposit)
+        public void MakeDeposit(decimal deposit, string note)
         {
             if (deposit == 0)
             {
@@ -53,11 +56,11 @@ namespace BankingApp
             else
             {
                 this.balance += deposit;
-                MakeTransaction($"Deposit of ${deposit} made.");
+                MakeTransaction(deposit, $"{note}");
             }
         }
 
-        public void MakeWithdrawal(decimal withdraw)
+        public void MakeWithdrawal(decimal withdraw, string note)
         {
             if (withdraw == 0)
             {
@@ -70,26 +73,41 @@ namespace BankingApp
             else
             {
                 this.balance -= withdraw;
-                MakeTransaction($"Withdrawal of ${withdraw} made.");
+                MakeTransaction(withdraw, $"{note}");
             }
         }
 
-        void MakeTransaction(string transaction)
+        public void MakeTransaction(decimal amount, string note)
         {
-            this.logs.Add($"Transaction #{this.logs.Count()}: {transaction}");
+            logs.Add(new Transaction(amount, DateTime.Now, note));
         }
 
-        public void Logs()
+        public string Logs()
         {
-            Console.WriteLine("###");
-            foreach (string log in this.logs)
+            string display;
+
+            // string display = "###\n";
+            // foreach (Transaction log in this.logs)
+            // {
+            //     display += $"# {log.ToString()}\n";
+            // }
+            // Console.WriteLine("###");
+
+            // The above code is also valid. It simply just uses more resources than using StringBuilder.
+
+            var report = new System.Text.StringBuilder();
+            report.Append("TransactionID\tDate\t\tAmount\t\tNote\n");
+            foreach (var log in this.logs)
             {
-                Console.WriteLine($"# {log}");
+                report.AppendLine(log.ToString());
             }
-            Console.WriteLine("###");
+            display = report.ToString();
+
+            return display;
         }
 
-        public string ToString()
+        // Must override the Object class
+        public override string ToString()
         {
             string display = "###\n";
             display += $"# Account #: {this.accountNumber}\n";

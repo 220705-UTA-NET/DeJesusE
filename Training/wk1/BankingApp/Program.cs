@@ -19,8 +19,11 @@ namespace BankingApp
                 // newAccount.Logs();
 
                 newAccount2.AddInterest();
+                newAccount2.MakeDeposit(150, "Got paid.");
+                newAccount2.MakeWithdrawal(10, "Bought something.");
+
                 Console.WriteLine(newAccount2.ToString());
-                newAccount2.Logs();
+                Console.WriteLine(newAccount2.Logs());
             }
             catch (Exception e)
             {
