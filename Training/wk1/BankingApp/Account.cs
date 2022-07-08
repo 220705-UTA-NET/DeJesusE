@@ -6,7 +6,8 @@ namespace BankingApp
     {
         // Fields, or states
 
-        private int accountNumber;
+        public int accountNumber { get; set; }
+        // private int accountNumber;
         private string fName;
         private string lName;
         protected decimal balance;
@@ -14,7 +15,7 @@ namespace BankingApp
 
 
         // There is only one accountNumberSeed for objects created from Account and it is shared
-        // amongst them.
+        // amongst them due to it being static.
         private static int accountNumberSeed = 0;
 
         // Random number generator for account number. Abandoned as it didn't protect against duplicity.
@@ -23,6 +24,7 @@ namespace BankingApp
         // Methods / Behaviors
         // [access modifier] [return type] [name]([parameters]) { ... }
 
+        // Constructor
         public Account() { }
 
         public Account(string fName, string lName, decimal balance)
@@ -37,8 +39,7 @@ namespace BankingApp
             MakeDeposit(balance);
         }
 
-        private int accountNumber { get; set; }
-
+        // Methods
         public void MakeDeposit(decimal deposit)
         {
             if (deposit == 0)
@@ -90,16 +91,15 @@ namespace BankingApp
 
         public string ToString()
         {
-            string display = "";
-            display += "##\n";
+            string display = "###\n";
             display += $"# Account #: {this.accountNumber}\n";
             display += $"# {this.fName} {this.lName}\n";
             display += $"# Balance: {this.balance}\n";
-            display += "##\n";
+            display += "###\n";
 
             return display;
         }
 
-        // Methods
+
     }
 }

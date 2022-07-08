@@ -1,4 +1,4 @@
-namespace Banking
+namespace BankingApp
 {
     class SavingsAccount : Account // the ": Account" means we are EXTENDING the Account class.
     // The Savings Account IS-A Account 
@@ -7,7 +7,7 @@ namespace Banking
         private double interestRate;
 
         // Constructor
-        public SavingsAccount(double interestRate)
+        public SavingsAccount(string fname, string lname, decimal balance, double interestRate) : base(fname, lname, balance)
         {
             this.interestRate = interestRate;
         }
@@ -15,10 +15,9 @@ namespace Banking
         // Methods / Behaviors
         public void AddInterest()
         {
-            int payment = (this.balance * this.interestRate);
+            decimal payment = (this.balance * ((decimal)this.interestRate));
             this.MakeDeposit(payment);
         }
 
-        // Constructor
     }
 }
