@@ -1,0 +1,45 @@
+- Concepts
+  - OOP
+    - Encapsulation
+    - Abstraction
+    - Inheritance
+    - Polymorphism
+- What is GIT?
+  - What is version control? What are the types and where does GIT fit into this?
+  - GIT commands: git add, git status, git log, git commit, git clone, git init, git reset, git revert, git push, git pull
+  - Repositories
+  - Branches/Branching
+  - Commits
+  - Pull request - requesting a merge
+  - Repository Permissions
+  - Merge Conflicts and resolutions
+  - Forking
+  - .gitignore
+- Dotnet SDK
+  - environment
+  - dotnet runtime (CLR - Common Language Runtime)
+  - compiling to an intermediate language (CLI - Common Language Infrastructure)
+- C# Topics
+  - Access modifiers (public, private, internal, protected)
+  - Data Types
+    - Value vs. Reference types
+  - Control Flow
+  - Operators
+    - Logical, Arithmetic, Comparative
+  - Classes
+    - Fields / States / Members
+    - Methods
+  - Namespaces
+  - Branching/Conditional Statements
+  - Exceptions
+    - Throwing exceptions
+    - Exception handling
+  - Abstract classes
+  - Overriding / Overloading
+  - Type Conversion
+  - Data structures: Arrays, Lists, stacks, queues
+  - Memory Architecture
+    - Stack/Heap
+  - Constructor methods, : base()
+- Bash
+  - ls, mkdir, touch, cat, cd, rm, pwd, mv, cp, nano/vim, rmdir, echo, clear, man
