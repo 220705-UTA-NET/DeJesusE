@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace Battleship
@@ -18,7 +19,7 @@ namespace Battleship
             }
         }
 
-        string GenerateDivider()
+        private string GenerateDivider()
         {
             string divider = "   ";
             for (int i = 0; i < board.GetLength(0); i++)
@@ -31,7 +32,7 @@ namespace Battleship
             return divider;
         }
 
-        string Header()
+        private string Header()
         {
             string header = "   ";
             for (int j = 0; j < board.GetLength(1); j++)
@@ -62,9 +63,7 @@ namespace Battleship
                 response.Append($" {i} ");
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    // Console.Write($"|X|");
                     response.Append($"| {board[i, j]} ");
-
                 }
                 response.Append("|\n");
                 response.Append(GenerateDivider());
