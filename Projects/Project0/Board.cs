@@ -5,16 +5,20 @@ namespace Battleship
 {
     class Board
     {
-        private char[,] board;
+        private char[,] visualBoard;
+        private char[,] actualBoard;
 
         public Board(int size)
         {
-            board = new char[size, size];
-            for (int i = 0; i < board.GetLength(0); i++)
+            actualBoard = new char[size, size];
+            visualBoard = new char[size, size];
+
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int j = 0; j < size; j++)
                 {
-                    board[i, j] = 'X';
+                    actualBoard[i, j] = 'X';
+                    visualBoard[i, j] = ' ';
                 }
             }
         }
@@ -22,7 +26,7 @@ namespace Battleship
         private string GenerateDivider()
         {
             string divider = "   ";
-            for (int i = 0; i < board.GetLength(0); i++)
+            for (int i = 0; i < actualBoard.GetLength(0); i++)
             {
                 divider += "+ - ";
             }
@@ -35,7 +39,7 @@ namespace Battleship
         private string Header()
         {
             string header = "   ";
-            for (int j = 0; j < board.GetLength(1); j++)
+            for (int j = 0; j < actualBoard.GetLength(1); j++)
             {
                 header += $"  {j} ";
             }
@@ -44,9 +48,9 @@ namespace Battleship
 
         internal bool Hit(int x, int y)
         {
-            if (board[x, y] == 'X')
+            if (actualBoard[x, y] == 'X')
             {
-                board[x, y] = 'O';
+                visualBoard[x, y] = 'X';
                 return true;
             }
             return false;
@@ -58,12 +62,12 @@ namespace Battleship
             response.Append(Header());
             response.Append(GenerateDivider());
 
-            for (int i = 0; i < board.GetLength(0); i++)
+            for (int i = 0; i < visualBoard.GetLength(0); i++)
             {
                 response.Append($" {i} ");
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int j = 0; j < visualBoard.GetLength(1); j++)
                 {
-                    response.Append($"| {board[i, j]} ");
+                    response.Append($"| {visualBoard[i, j]} ");
                 }
                 response.Append("|\n");
                 response.Append(GenerateDivider());

@@ -1,9 +1,13 @@
 - Concepts
   - OOP
-    - Encapsulation
-    - Abstraction
-    - Inheritance
-    - Polymorphism
+    - Encapsulation - idea of bundling up data and methods that perform a certain functionality into one unit, i.e. the class, and creating limitations on how other classes can access
+      said fields and methods (Links up with access modifiers). This way, we can protect the class's fields from being modified in a way that breaks it which may create errors
+      within the program.
+    - Abstraction - the idea of hiding any complexity and unnecessary details from the user or from a outside class and instead only showing the functionality. Purpose is to allow for other
+      classes to use it without having to worry about the intricacies of the underlying structure.
+    - Inheritance - allows us to expand the functinality of a class by allowing it to share fields and methods from another class and expanding upon it without having to re-write code. Purpose to prevent us from  
+      having to re-write code and to expand the core-code dynamically.
+    - Polymorphism -
 - What is GIT?
   - What is version control? What are the types and where does GIT fit into this?
   - GIT commands: git add, git status, git log, git commit, git clone, git init, git reset, git revert, git push, git pull

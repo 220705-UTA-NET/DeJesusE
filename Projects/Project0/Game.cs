@@ -33,7 +33,6 @@ namespace Battleship
                         coordinates = input.ToCharArray();
                         x = (int)char.GetNumericValue(coordinates[0]);
                         y = (int)char.GetNumericValue(coordinates[coordinates.GetLength(0) - 1]);
-                        Console.WriteLine("{0}, {1}", x, y);
 
                         if (board.Hit(x, y))
                         {
