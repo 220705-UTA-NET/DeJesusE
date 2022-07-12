@@ -7,7 +7,7 @@
       classes to use it without having to worry about the intricacies of the underlying structure.
     - Inheritance - allows us to expand the functinality of a class by allowing it to share fields and methods from another class and expanding upon it without having to re-write code. Purpose to prevent us from  
       having to re-write code and to expand the core-code dynamically.
-    - Polymorphism -
+    - Polymorphism - objects of a derived class may be treated as objects of a base class in places such as method parameters and collections or arrays. Base classes may define and implement virtual methods, and derived classes can override them, which means they provide their own definition and implementation.
 - What is GIT?
   - What is version control? What are the types and where does GIT fit into this?
   - GIT commands: git add, git status, git log, git commit, git clone, git init, git reset, git revert, git push, git pull
