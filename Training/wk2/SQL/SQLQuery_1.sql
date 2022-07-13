@@ -126,13 +126,91 @@
    JOIN Type AS T
    ON T.Id = PT.TypeId;
 
-   
+
+-- Schema : a list of logical structures of data
+-- dbo is the default schema;
+-- Create SCHEMA newschema;
+-- SELECT * FROM newschema.NewTable;
+
+SELECT * FROM dbo.Customer;
+SELECT FirstName FROM dbo.Customer WHERE LEN(FirstName) = 6;
+
+-- User-Defined Functions
+-- Functions CAN NOT modify the data of a table, they are "read-only"
+-- Only really useful for SELECT statements
+
+GO -- Used to "batch" your statements together
+CREATE FUNCTION dbo.TotalNumberOfCustomers()
+RETURNS INT
+AS 
+   BEGIN
+      DECLARE @result INT;
+      SELECT @result = Count(*) FROM dbo.Customer;
+      RETURN @result;
+   END
+GO
+
+SELECT dbo.TotalNumberOfCustomers() AS "Number of Customers";
+SELECT Count(*) FROM dbo.Customer AS "Number of Customers";
+
+GO
+CREATE FUNCTION dbo.CustomersWithFirstNameLengthof(@length INT)
+RETURNS TABLE -- stored / user defined functions can return an entire table
+AS
+   RETURN (SELECT * FROM dbo.Customer WHERE LEN(FirstName) = @length); 
+GO
+
+-- Use the select statement on the return from the function, because it is a table
+SELECT FirstName FROM dbo.CustomersWithFirstNameLengthof(9);
+
+-- Stored Procedures are similiar to function, except that we can also modify the database
+GO
+CREATE OR ALTER PROCEDURE dbo.UpdateAllCustomers( @postalcode INT, @modified INT OUTPUT) -- use OUTPUT as a parameter to take the place of a RETURN; 
+AS                                                                                       -- OR ALTER, will alter a pre-existing function if it has already been declared
+BEGIN
+   BEGIN TRY
+      IF (NOT EXISTS (SELECT * FROM dbo.Customer))
+         BEGIN
+            RAISERROR ('No data found in table', 15, 1);
+         END
+      SET @modified = (SELECT COUNT(*) FROM dbo.Customer);
+      UPDATE dbo.Customer SET PostalCode = @postalcode;
+   END TRY
+   BEGIN CATCH
+      PRINT 'ERROR'
+   END CATCH
+END
+GO
+
+SELECT PostalCode FROM dbo.Customer;
+
+DECLARE @result INT;
+EXECUTE dbo.UpdateAllCustomers 12343, @result OUTPUT;
+SELECT @result;
+
+SELECT PostalCode FROM dbo.Customer;
 
 
+-- Triggers
+-- Some code that will run, instead of or after you insert
+-- , update, or delete to a specified table.
 
+GO
+CREATE TRIGGER Playlist.DateModified ON Playlist.Name
+AFTER UPDATE
+AS
+   BEGIN
+      UPDATE Playlist.Name 
+      SET DateModified = SYSUTCDATETIME()
+      WHERE Id IN (SELECT Id FROM Inserted) --triggers get access to two special table-valued variables, inserted and deleted.
+   END
+GO
 
-
-
-
-
-
+GO
+CREATE TRIGGER PreventDelete ON Playlist
+INSTEAD OF DELETE
+AS
+   BEGIN
+      RAISERROR('Delete not authorized.', 15, 1)
+   END
+GO

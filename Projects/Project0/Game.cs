@@ -2,30 +2,47 @@ namespace Battleship
 {
     class Game
     {
-        private Board board;
+        private Player playerA;
+
+        private Player playerB;
+
         public Game()
         {
             Console.Write("Please enter a board width: ");
-            board = new Board(int.Parse(Console.ReadLine()));
+            int size = int.Parse(Console.ReadLine());
+
+            Console.Write("Please provide name for player 1: ");
+            string nameA = Console.ReadLine();
+
+            Console.Write("Please provide name for player 2: ");
+            string nameB = Console.ReadLine();
+
+            playerA = new Player(nameA, size);
+            playerB = new Player(nameB, size);
+
         }
 
-        private void PrintBoard()
-        {
-            Console.Write(board.ToString());
-        }
+        // private void PrintBoard()
+        // {
+        //     Console.Write(actualBoard.ToString());
+        // }
+
+        // public void setOpponent(Game game){
+        //     this.opponent = game;
+        // }
 
         public void Run()
         {
-            Console.Write(board.ToString());
             string input;
             char[] coordinates;
             int x;
             int y;
+            Player temp;
+
             do
             {
-                Console.Write("Please enter a coordinate: ");
+                PrintBoards();
                 input = Console.ReadLine();
-
                 if (input != "exit")
                 {
                     try
@@ -34,16 +51,14 @@ namespace Battleship
                         x = (int)char.GetNumericValue(coordinates[0]);
                         y = (int)char.GetNumericValue(coordinates[coordinates.GetLength(0) - 1]);
 
-                        if (board.Hit(x, y))
+                        if (playerB.Hit(x, y))
                         {
-                            Console.WriteLine("HIT!!!!");
+                            Console.WriteLine("HIT !!!");
                         }
                         else
                         {
-                            Console.WriteLine("MISS!!!");
+                            Console.WriteLine("MISS !!!");
                         }
-
-                        Console.Write(board.ToString());
                     }
                     catch (Exception e)
                     {
@@ -51,8 +66,20 @@ namespace Battleship
                     }
                 }
 
+                temp = playerA;
+                this.playerA = this.playerB;
+                this.playerB = temp;
+
             } while (input != "exit");
 
+        }
+
+        private void PrintBoards()
+        {
+            Console.WriteLine(playerA.actualBoard.ToString());
+            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine(playerB.visualBoard.ToString());
+            Console.Write($"{playerA.name}, please enter a coordinate: ");
         }
     }
 }

@@ -29,9 +29,10 @@
       4. git reset - it can modify the index or change which commit a branch head is currently pointing at. Therefore the command may alter existing history by changing the commit that a branch references
       5. git push - used to upload a local repository into a remote repository
       6. git pull - used to download changes made in a remote repository to the local repository
-      7. git fetch - downloads commits, files, and referances form a remote repository into your local repository without forcing you to merge the changes into your repository.
+      7. git fetch - downloads commits, files, and referances from a remote repository into your local repository without forcing you to merge the changes into your repository.
       8. git merge - incorporates changes from two different commits into the current branch
       9. git revert - creates a new commit that undoes changes made from a previous commit without modifying the project existing history
+      10. git checkout - switches branches or commits
 
   - GIT repository is the .git folder inside a project which tracks changes made to files / folder within your project
   - Branches/Branching: When performing a commit in GIT, you are creating a snapshot of your project and adding it a tree-structure. When branching, you are then creating a new pointer separate from the master pointer (Which is the initial pointer), that way you can commit additional changes without affecting the main branch or project.
@@ -50,7 +51,7 @@
     - public - the field/method is accessible to all classes
     - private - the field/method is only accessible objects of the same class
     - protected - the field/method is accessible to objects of the same class or
-                  objects iherited from that class
+      objects iherited from that class
     - internal - the field/method is only accessible from objects of classes that exist in the same assembly
     - You can also have a combination of protected internal and private protected
   - Data Types
@@ -61,63 +62,64 @@
         - long - stores whole numbers that can be represented in 8 bytes
         - float - stores floating point numbers that can be represented by 4 bytes
         - double - stores floating point numbers that can be represented by 8 bytes
-        - char - stores a single unicode character/letter; size 2 bytes 
+        - char - stores a single unicode character/letter; size 2 bytes
         - decimal - stores floating point numbers that can be represented by 16 bytes
+      - Reference : value is stored in the heap with a pointer variable pointing to it from the stack
   - Control Flow - changes the order in which statements are runned
-    - Conditionals -checks a condition to determine whether or not to run a code                       
-                    block
-      - IF ... ELSE - checks if a condition is true before performing a code block.                       
-                      Can have one or multiple checks and can have default case                           
-                      should all condition check out as false. Once one condition                         
-                      is meet, the program exit out of the IF-ELSE statement.
-      - Switch statement - checks if an expression matches a value before executing                            
-                           a code block. Once code block is executed, it will then                            
-                           continue checking each case value until it encounters a                            
-                           break statement.
+    - Conditionals -checks a condition to determine whether or not to run a code  
+       block
+      - IF ... ELSE - checks if a condition is true before performing a code block.  
+         Can have one or multiple checks and can have default case  
+         should all condition check out as false. Once one condition  
+         is meet, the program exit out of the IF-ELSE statement.
+      - Switch statement - checks if an expression matches a value before executing  
+         a code block. Once code block is executed, it will then  
+         continue checking each case value until it encounters a  
+         break statement.
     - Loops - a code block is carried out repeately until a condition is meet
       - for - will perform a code block a finite number of times
-      - while - will perform a code block repeatedly until a condition evaluates as                 
-                false
-      - do while - will perform a code block once before performing repeatedly                        
-                   until a condition evaluates as false
-      - foreach - will iterate through a list or array and perform a code block on                   
-                  each element until it runs out of elements
+      - while - will perform a code block repeatedly until a condition evaluates as  
+         false
+      - do while - will perform a code block once before performing repeatedly  
+         until a condition evaluates as false
+      - foreach - will iterate through a list or array and perform a code block on  
+         each element until it runs out of elements
   - Operators
     - Logical
-      - Standard: ||, &&, ! => Returns a boolean   
+      - Standard: ||, &&, ! => Returns a boolean
     - Arithmetic
-      - Standard: +, -, /, *, **, % => Returns the result
+      - Standard: +, -, /, \*, \*\*, % => Returns the result
     - Comparative
-      -  >=, >, <, <=, ==, != => Returns a boolean
+      - > =, >, <, <=, ==, != => Returns a boolean
   - Classes
     - Fields / States / Members
-      - Refers to class variables. Usually represents attributes of our object or           
+      - Refers to class variables. Usually represents attributes of our object or  
         contains data relating to the object.
     - Methods
-      - The functionality of an object. Refers to behaviors that the object may have.  
-  - Namespaces - denotes the assembly that the class belongs to. Used to group                      
-                 classes together to avoid name collisions by providing a scope 
-                 for identifiers.
-  - Exceptions - objects representing error events. When an error occurs, an exception object 
-                 is created is thrown (throw keyword) where it is then catched by the CLR                  
-                 where it finds the most appropriate handler to handle the error.
+      - The functionality of an object. Refers to behaviors that the object may have.
+  - Namespaces - denotes the assembly that the class belongs to. Used to group  
+     classes together to avoid name collisions by providing a scope
+    for identifiers.
+  - Exceptions - objects representing error events. When an error occurs, an exception object
+    is created is thrown (throw keyword) where it is then catched by the CLR  
+     where it finds the most appropriate handler to handle the error.
     - Throwing exceptions - you can manually throw an exception by utilizing the throw keyword followed by the exception object of the type you want to throw
       ex. throw new [Exception];
     - Exception handling - you can manually handle an exception by utilizing a try-catch block
-      ex. 
-        try {
-                ...
-        } Catch ([Exception Type] [variable name]){
-                ...
-        }
-  - Abstract classes - type of class that contains methods that haven't been implemented or are 
-                       incomplete. Classes that inherit an abstract class must then implement said
-                       methods or complete said methods via override.
+      ex.
+      try {
+      ...
+      } Catch ([Exception Type] [variable name]){
+      ...
+      }
+  - Abstract classes - type of class that contains methods that haven't been implemented or are
+    incomplete. Classes that inherit an abstract class must then implement said
+    methods or complete said methods via override.
     - You declare a method abstract if you want a child class to implement it: abstract void method();
     - You can provide a default implementation for a method and have a child class modify it: virtual void method();
   - Overriding / Overloading
     - Overriding - is the idea of replacing a method with another implementation of the method. New method must have the same
-                   name, return type, # of parameters (In the same order), and same data type for each parameter.
+      name, return type, # of parameters (In the same order), and same data type for each parameter.
     - Overloading - is the idea of having multiple methods of the same name but with a different set of parameters
   - Type Conversion:
     - Implicit - doesn't require any special syntax. Can be done if data will not be lost when doing the conversion. Ex. double d = [int] i
@@ -129,16 +131,40 @@
     - Queues - a collection of elements following the First In First Out Principle
   - Memory Architecture
     - Stack/Heap
-      - Stack - located in upper memory. Where the memory of most things are allocated 
-                such as variables, statements, methods, loops etc. 
-              - unflexible
-              - static allocation
+      - Stack - located in upper memory. Where the memory of most things are allocated
+        such as variables, statements, methods, loops etc. - unflexible - static allocation
       - Heap - located in lower addresses in memory. Where objects that are dynamically
-               created during runtime are stored
-             - dynamic allocation
+        created during runtime are stored - dynamic allocation
   - Constructor methods, : base()
     - Constructor method - creates objects of a class
-    - : base () - references the parent constructor and can be used to pass parameters to it 
-- Bash - UNIX shell and command line language. Similiar to PowerShell and Command prompt in windows. 
-         Allows you to quickly perform instructions/commands. 
-  - ls, mkdir, touch, cat, cd, rm, pwd, mv, cp, nano/vim, rmdir, echo, clear, man
+    - : base () - references the parent constructor and can be used to pass parameters to it
+- Bash - is the UNIX shell, or command language intrepreter, for the GNU operating system and command line language.
+  Similiar to PowerShell and Command prompt in windows. Allows for greater flexibility in what you can do as
+  well as greater performance as you don't need to navigate with your mouse to perform a function. Also, when
+  done in conjuction with a scripting language, allows for automation of tasks.
+
+  - ls - List - lists files and directories within the path given (Defaults to current directory)
+  - mkdir - creates a new directory with the name provided to it
+  - touch - originally meant to update the timesheet of a file, it has been used mostly to create files
+  - cat - concatenate - reads through a file sequentially and writes it to standard output (a file descripter; defaults to console)
+  - cd - change directory - used to change the current directory to the argument given
+    - relative - ./, ../, ~/ - location to within the file system relative to the current directory
+    - absolute - C:.... - location within the file system relative to the root directory
+  - rm - remove - removes a file, directory, or symbolic link - file which points to another file or directory
+    - rm -i : interactive deletion
+    - rm -f : force deletion
+    - rm -r : recursive deletion
+  - pwd - print the current working directory
+  - mv - moves a file or folder to the given location. Can also change the name of a file if given a different file name than the one being moved
+  - cp - copies a file to the location given. similiar to mv in that it can also rename files
+  - nano/vim - text editor thats provided by the bash to allow for users to edit files
+  - rmdir - removes a directory.
+  - echo - outputs a given string to stdout , which defaults to the console
+  - clear - used to bring the command line on top of the terminal, i.e. it clears the terminal
+  - man - manual page - form of software documentation found on the UNIX operating system
+
+  Where to go when you don't know something
+
+  - bash commands : use the --help flag for commmands to get information on the functionality of a command. you can also use the man command.
+  - C# : use microsoft's documentation
+  - GIT : use the --help flag for git commands for information on commands or consult git scm
