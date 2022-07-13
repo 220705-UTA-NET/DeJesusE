@@ -8,8 +8,15 @@ Database
   - manage databases (environment)
   - CRUD commands - Create, Read, Update, Delete
 - DML - Data Manipulation Language - allows our to modify and manipulate our data (the cells)
+  - INSERT
+  - DELETE
+  - TRUNCATE
+  - UPDATE
 - DCL - Data Control Language - controls access to data within the tables
 - DDL - Data Definition Language - allows us to create the structure for our data (the tables)
+  - CREATE
+  - ALTER
+  - DROP
 - DQL - Data Query Language - allows our to structure our query or the search of our data
 
 Normalization
