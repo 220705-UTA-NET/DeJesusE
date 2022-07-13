@@ -46,26 +46,99 @@
   - Common Language Runtime (CLR), which is the virtual machine used in executing .NET programs and provides services such as memory management, exception handling, thread management, and garbage collection for your program
   - Common Language Infrastructure (CLI)- allows for multiple high-level languages to be used across multiple platforms
 - C# Topics
-  - Access modifiers (public, private, internal, protected)
+  - Access modifiers (public, private, internal, protected): controls access to a field/method/ or class
+    - public - the field/method is accessible to all classes
+    - private - the field/method is only accessible objects of the same class
+    - protected - the field/method is accessible to objects of the same class or
+                  objects iherited from that class
+    - internal - the field/method is only accessible from objects of classes that exist in the same assembly
+    - You can also have a combination of protected internal and private protected
   - Data Types
     - Value vs. Reference types
-  - Control Flow
+      - Value (Built-In Types): value is stored directly into its own memory space within the stack
+        - bool - stores a boolean value of either true or false (1 bit)
+        - int - stores whole numbers that can be represented in 4 bytes
+        - long - stores whole numbers that can be represented in 8 bytes
+        - float - stores floating point numbers that can be represented by 4 bytes
+        - double - stores floating point numbers that can be represented by 8 bytes
+        - char - stores a single unicode character/letter; size 2 bytes 
+        - decimal - stores floating point numbers that can be represented by 16 bytes
+  - Control Flow - changes the order in which statements are runned
+    - Conditionals -checks a condition to determine whether or not to run a code                       
+                    block
+      - IF ... ELSE - checks if a condition is true before performing a code block.                       
+                      Can have one or multiple checks and can have default case                           
+                      should all condition check out as false. Once one condition                         
+                      is meet, the program exit out of the IF-ELSE statement.
+      - Switch statement - checks if an expression matches a value before executing                            
+                           a code block. Once code block is executed, it will then                            
+                           continue checking each case value until it encounters a                            
+                           break statement.
+    - Loops - a code block is carried out repeately until a condition is meet
+      - for - will perform a code block a finite number of times
+      - while - will perform a code block repeatedly until a condition evaluates as                 
+                false
+      - do while - will perform a code block once before performing repeatedly                        
+                   until a condition evaluates as false
+      - foreach - will iterate through a list or array and perform a code block on                   
+                  each element until it runs out of elements
   - Operators
-    - Logical, Arithmetic, Comparative
+    - Logical
+      - Standard: ||, &&, ! => Returns a boolean   
+    - Arithmetic
+      - Standard: +, -, /, *, **, % => Returns the result
+    - Comparative
+      -  >=, >, <, <=, ==, != => Returns a boolean
   - Classes
     - Fields / States / Members
+      - Refers to class variables. Usually represents attributes of our object or           
+        contains data relating to the object.
     - Methods
-  - Namespaces
-  - Branching/Conditional Statements
-  - Exceptions
-    - Throwing exceptions
-    - Exception handling
-  - Abstract classes
+      - The functionality of an object. Refers to behaviors that the object may have.  
+  - Namespaces - denotes the assembly that the class belongs to. Used to group                      
+                 classes together to avoid name collisions by providing a scope 
+                 for identifiers.
+  - Exceptions - objects representing error events. When an error occurs, an exception object 
+                 is created is thrown (throw keyword) where it is then catched by the CLR                  
+                 where it finds the most appropriate handler to handle the error.
+    - Throwing exceptions - you can manually throw an exception by utilizing the throw keyword followed by the exception object of the type you want to throw
+      ex. throw new [Exception];
+    - Exception handling - you can manually handle an exception by utilizing a try-catch block
+      ex. 
+        try {
+                ...
+        } Catch ([Exception Type] [variable name]){
+                ...
+        }
+  - Abstract classes - type of class that contains methods that haven't been implemented or are 
+                       incomplete. Classes that inherit an abstract class must then implement said
+                       methods or complete said methods via override.
+    - You declare a method abstract if you want a child class to implement it: abstract void method();
+    - You can provide a default implementation for a method and have a child class modify it: virtual void method();
   - Overriding / Overloading
-  - Type Conversion
+    - Overriding - is the idea of replacing a method with another implementation of the method. New method must have the same
+                   name, return type, # of parameters (In the same order), and same data type for each parameter.
+    - Overloading - is the idea of having multiple methods of the same name but with a different set of parameters
+  - Type Conversion:
+    - Implicit - doesn't require any special syntax. Can be done if data will not be lost when doing the conversion. Ex. double d = [int] i
+    - Explicit - a keyword or method is used to convert the type of a value to another type without losing any data in the process. Ex. int i = CInt(d);
   - Data structures: Arrays, Lists, stacks, queues
+    - Array - an collection of elements. Size is set once initialized and cannot be changed.
+    - Lists - an collection of elements where size can change
+    - Stacks - a collection of elements following the First In Last Out Principle
+    - Queues - a collection of elements following the First In First Out Principle
   - Memory Architecture
     - Stack/Heap
+      - Stack - located in upper memory. Where the memory of most things are allocated 
+                such as variables, statements, methods, loops etc. 
+              - unflexible
+              - static allocation
+      - Heap - located in lower addresses in memory. Where objects that are dynamically
+               created during runtime are stored
+             - dynamic allocation
   - Constructor methods, : base()
-- Bash
+    - Constructor method - creates objects of a class
+    - : base () - references the parent constructor and can be used to pass parameters to it 
+- Bash - UNIX shell and command line language. Similiar to PowerShell and Command prompt in windows. 
+         Allows you to quickly perform instructions/commands. 
   - ls, mkdir, touch, cat, cd, rm, pwd, mv, cp, nano/vim, rmdir, echo, clear, man
