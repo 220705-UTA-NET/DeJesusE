@@ -1,3 +1,4 @@
+using System.Text;
 namespace Battleship
 {
     class Game
@@ -6,10 +7,15 @@ namespace Battleship
 
         private Player playerB;
 
+        private int x;
+        private int y;
+
         public Game()
         {
             Console.Write("Please enter a board width: ");
             int size = int.Parse(Console.ReadLine());
+
+            this.x = this.y = size;
 
             Console.Write("Please provide name for player 1: ");
             string nameA = Console.ReadLine();
@@ -17,19 +23,12 @@ namespace Battleship
             Console.Write("Please provide name for player 2: ");
             string nameB = Console.ReadLine();
 
+            Console.WriteLine();
+
             playerA = new Player(nameA, size);
             playerB = new Player(nameB, size);
 
         }
-
-        // private void PrintBoard()
-        // {
-        //     Console.Write(actualBoard.ToString());
-        // }
-
-        // public void setOpponent(Game game){
-        //     this.opponent = game;
-        // }
 
         public void Run()
         {
@@ -42,6 +41,7 @@ namespace Battleship
             do
             {
                 PrintBoards();
+                Console.Write($"{playerA.name}, please give provide coordinates: ");
                 input = Console.ReadLine();
                 if (input != "exit")
                 {
@@ -76,10 +76,43 @@ namespace Battleship
 
         private void PrintBoards()
         {
-            Console.WriteLine(playerA.actualBoard.ToString());
-            Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine(playerB.visualBoard.ToString());
-            Console.Write($"{playerA.name}, please enter a coordinate: ");
+
+            StringBuilder response = new StringBuilder();
+            response.Append(Header());
+            response.Append(GenerateDivider());
+
+            for (int i = 0; i < this.x; i++)
+            {
+                response.Append(playerA.actualBoard.GetRow(i));
+                response.Append("    |   ");
+                response.Append(playerB.visualBoard.GetRow(i));
+                response.Append("\n");
+                response.Append(GenerateDivider());
+            }
+
+            Console.WriteLine(response.ToString());
+        }
+
+        private string GenerateDivider()
+        {
+            string divider = "   ";
+            for (int i = 0; i < this.y; i++)
+            {
+                divider += "+ - ";
+            }
+
+            divider += "+    |   " + divider + "+" + "\n";
+            return divider;
+        }
+
+        private string Header()
+        {
+            string header = "   ";
+            for (int j = 0; j < this.y; j++)
+            {
+                header += $"  {j} ";
+            }
+            return header + "     |   " + header + "\n";
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Battleship
 {
     class Board
     {
-        private char[,] board;
+        public char[,] board { get; set; }
 
         public Board(int size)
         {
@@ -51,6 +51,18 @@ namespace Battleship
                 header += $"  {j} ";
             }
             return header + "\n";
+        }
+
+        public string GetRow(int x)
+        {
+            StringBuilder response = new StringBuilder();
+            response.Append($" {x} ");
+            for (int j = 0; j < board.GetLength(1); j++)
+            {
+                response.Append($"| {board[x, j]} ");
+            }
+            response.Append("|");
+            return response.ToString();
         }
 
 

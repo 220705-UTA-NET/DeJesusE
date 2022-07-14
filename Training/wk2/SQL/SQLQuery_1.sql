@@ -214,3 +214,72 @@ AS
       RAISERROR('Delete not authorized.', 15, 1)
    END
 GO
+
+CREATE SCHEMA School;
+GO
+   CREATE TABLE School.Students(
+      Id int PRIMARY KEY,
+      Name NVARCHAR(255) NOT NULL,
+      Email NVARCHAR(255),
+      Phone NVARCHAR(15),
+      Street NVARCHAR(255) NOT NULL,
+      City NVARCHAR(255) NOT NULL,
+      State NVARCHAR(255) NOT NULL,
+      ZipCode int NOT NULL,
+      Age int NOT NULL,
+      Year int NOT NULL
+   )
+
+   CREATE TABLE School.Students(
+      Id int PRIMARY KEY,
+      Name NVARCHAR(255) NOT NULL,
+      Email NVARCHAR(255),
+      Phone NVARCHAR(15),
+      Street NVARCHAR(255) NOT NULL,
+      City NVARCHAR(255) NOT NULL,
+      State NVARCHAR(255) NOT NULL,
+      ZipCode int NOT NULL,
+      Age int NOT NULL,
+      Subject NVARCHAR(255) NOT NULL,
+      Room NVARCHAR(255),
+      Tenure BIT NOT NULL,
+      Salary DECIMAL NOT NULL
+   )
+
+   CREATE TABLE Certifications(
+      Id int PRIMARY KEY IDENTITY,
+      Name NVARCHAR(255) NOT NULL
+   )
+
+   CREATE TABLE TeacherCertification(
+      Id int PRIMARY KEY IDENTITY,
+      TeacherID int NOT NULL,
+      CertificationID int NOT NULL
+   )
+
+   CREATE TABLE Courses(
+      Id NVARCHAR(12) PRIMARY KEY,
+      Name NVARCHAR(255) NOT NULL,
+      Department NVARCHAR(255) NOT NULL,
+      Location NVARCHAR(255) NOT NULL,
+      StartDate DATETIME NOT NULL,
+      CreditHours INT NOT NULL
+   )
+
+   CREATE TABLE StudentCourses(
+      Id INT PRIMARY KEY IDENTITY,
+      StudentID INT NOT NULL,
+      CourseID NVARCHAR(255) NOT NULL
+   )
+
+   CREATE TABLE Requirements(
+      Id INT PRIMARY KEY IDENTITY,
+      Req NVARCHAR(255) NOT NULL
+   )
+
+   CREATE TABLE CourseRequirements (
+      Id INT PRIMARY KEY IDENTITY,
+      CourseID NVARCHAR(255) NOT NULL,
+      ReqID INT NOT NULL
+   )
+GO
