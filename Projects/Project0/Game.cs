@@ -1,11 +1,8 @@
-/*
-The game itself. Initializes the player objects for each of the players and calls on them to initialize their boards. After that, it rotates between the
-players, asking for coordinates that which they wish to target. Once a win condition is meet (i.e. one of the players have run out of pieces on their board),
-the game will then declare a winner before returning to the Program object and closing the program.
 
-@author Ellery R. De Jesus
-@since 7/19/2022
-*/
+// The game itself. Initializes the player objects for each of the players and calls on them to initialize their boards. After that, it rotates between the
+// players, asking for coordinates that which they wish to target. Once a win condition is meet (i.e. one of the players have run out of pieces on their board),
+// the game will then declare a winner before returning to the Program object and closing the program.
+
 namespace Battleship
 {
     class Game
@@ -64,9 +61,15 @@ namespace Battleship
             bool ValidInput = false;
             bool exit = false;
 
+            // Repeat the process of requesting the players for coordinates in which to target and checking
+            // if the strike was a hit or miss. Ends once a victor is decided or one of the player provides
+            // the string "exit".
             do
             {
                 Console.WriteLine(CurrentPlayer.PrintBoards());
+
+                // Request the current player provides current to strike at. Loops until the player
+                // provides a valid input.
                 do
                 {
                     Console.Write($"{CurrentPlayer.Name}, please provide coordinates: ");
@@ -98,6 +101,10 @@ namespace Battleship
                     }
                 } while (ValidInput != true);
 
+                // Checks to see if the player has given "exit". If not, then check coordinates on the
+                // opponent's board to see if they had a piece at the given location. If yes, then print
+                // a message notifying that and deduct a point from the opponent's hitpoints. If no, then
+                // print a message notifying the player that they had missed.
                 if (exit != true)
                 {
                     if (NextPlayer.Hit(x, y))
@@ -114,6 +121,8 @@ namespace Battleship
                         CurrentPlayer.OpponentBoard.SetCoord('O', x, y);
                     }
 
+                    // Checks the hitpoints of the player's opponent to see if it had reached 0. If yes,
+                    // then declare the player as the victor and exit the game.
                     if (NextPlayer.HitPoints == 0)
                     {
                         Console.WriteLine($"{CurrentPlayer.Name} has won !!!");
@@ -122,6 +131,7 @@ namespace Battleship
                     }
                     else
                     {
+                        // Swap out the current player with the player who is next.
                         temp = CurrentPlayer;
                         this.CurrentPlayer = this.NextPlayer;
                         this.NextPlayer = temp;

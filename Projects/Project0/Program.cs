@@ -23,7 +23,7 @@ namespace Battleship
             string nameA = "";
             string nameB = "";
 
-            // Get the height/width of the board
+            // Get the height/width of the board. Loop until a non-negative integer is provided.
             while (!ValidInput)
             {
                 Console.Write("Please enter a board height/width: ");
@@ -41,7 +41,7 @@ namespace Battleship
 
             ValidInput = false;
 
-            // Request names for both players
+            // Request the name for Player 1. Loops until a non-empty string is provided.
             while (!ValidInput)
             {
                 Console.Write("Please provide name for player 1: ");
@@ -57,6 +57,7 @@ namespace Battleship
                 }
             }
 
+            // Request for the name of Player 2. Loops until a non-empty string is provided.
             ValidInput = false;
             while (!ValidInput)
             {

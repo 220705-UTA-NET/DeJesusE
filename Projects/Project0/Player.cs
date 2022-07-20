@@ -1,14 +1,17 @@
 using System.Text;
 namespace Battleship
 {
+    // Represents one of the players of the game
     class Player
     {
+        // Board object which represents the board which holds the player's pieces.
         public Board PlayerBoard { get; set; }
-
+        // Board object which represents the board which is used to map out the player's hits/misses
         public Board OpponentBoard { get; set; }
-
+        // The name of the player
         public string Name { get; set; }
-
+        // How many points the player has before losing. Starts off as the sum of all slots that the player's
+        // pieces are occupying
         public int HitPoints { get; set; }
 
         public Player(string name, int size)
@@ -19,24 +22,31 @@ namespace Battleship
             HitPoints = 0;
         }
 
+        // Sets up the player's boards while adding up the sizes of each piece to generate a sum
+        // that is then used as the player's hitpoints.
         public void InitializeBoard()
         {
+            // Place the player's battleship on the board
             // Console.WriteLine(PrintBoard());
             // SetPiece(Pieces.Battleship);
             // HitPoints += Pieces.Battleship.Size;
 
+            // Place the player's carrier on the board
             // Console.WriteLine(PrintBoard());
             // SetPiece(Pieces.Carrier);
             // HitPoints += Pieces.Carrier.Size;
 
+            // Place the player's cruiser on the board
             // Console.WriteLine(PrintBoard());
             // SetPiece(Pieces.Cruiser);
             // HitPoints += Pieces.Cruiser.Size;
 
+            // Place the player's submarine on the board
             // Console.WriteLine(PrintBoard());
             // SetPiece(Pieces.Submarine);
             // HitPoints += Pieces.Submarine.Size;
 
+            // Place the player's destroyer on the board
             Console.WriteLine(PrintBoard());
             SetPiece(Pieces.Destroyer);
             HitPoints += Pieces.Destroyer.Size;
@@ -44,19 +54,24 @@ namespace Battleship
         }
 
 
-
+        // Places a given piece unto the player's board
         private void SetPiece(Pieces piece)
         {
-
+            // The player's input
             string? input;
+            // The coordinates that the player provided
             string[] coordinates;
 
             char direction;
             int x = 0;
             int y = 0;
 
+            // Used in verifying if the player submitted an appropriate input
             bool ValidInput = false;
 
+            // Loop continously until the player provides a set of coordinates that which
+            // isn't null, blank, or would result in a piece going overbound or overlapping
+            // another piece. 
             while (!ValidInput)
             {
 
@@ -96,6 +111,8 @@ namespace Battleship
                 }
             }
 
+            // Request for a cardinal direction for which to place the piece towards while checking
+            // for any possible invalid inputs.
             ValidInput = false;
             while (!ValidInput)
             {
@@ -114,13 +131,16 @@ namespace Battleship
 
         }
 
-
+        // Checks to see if the player has a piece at the given coordinates. If yes, return true.
+        // If no, then return false.
         public bool Hit(int x, int y)
         {
             char TileChar = PlayerBoard.GetCoord(x, y);
             return TileChar != ' ' && TileChar != 'X' ? true : false;
         }
 
+        // Returns a string representation of the player's boards so that it may be printed by
+        // Game unto the screen.
         public string PrintBoards()
         {
             StringBuilder response = new StringBuilder();
@@ -143,8 +163,8 @@ namespace Battleship
             return response.ToString();
         }
 
-
-
+        // Used in displaying the board that the player is using to contain their pieces. Primarily
+        // used to show what spots are empty when placing pieces.
         private string PrintBoard()
         {
             StringBuilder response = new StringBuilder();
@@ -159,6 +179,8 @@ namespace Battleship
             return response.ToString();
         }
 
+        // Helper method used in generating a divider to be used in separating the rows when
+        // printing to screen.
         private string GenerateDivider()
         {
             string divider = "   ";
@@ -171,6 +193,7 @@ namespace Battleship
             return divider;
         }
 
+        // Helper method used in generating a header for the columns when printing to screen.
         private string GenerateHeader()
         {
             string header = "   ";
