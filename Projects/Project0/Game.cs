@@ -1,118 +1,135 @@
-using System.Text;
+/*
+The game itself. Initializes the player objects for each of the players and calls on them to initialize their boards. After that, it rotates between the
+players, asking for coordinates that which they wish to target. Once a win condition is meet (i.e. one of the players have run out of pieces on their board),
+the game will then declare a winner before returning to the Program object and closing the program.
+
+@author Ellery R. De Jesus
+@since 7/19/2022
+*/
 namespace Battleship
 {
     class Game
     {
-        private Player playerA;
+        // The player who's turn is ongoing
+        private Player CurrentPlayer;
+        // The player who's turn is next
+        private Player NextPlayer;
 
-        private Player playerB;
-
+        // The height of the board (# of rows). Currently interchangeable with the variable y.
         private int x;
+        // The width of the board (# of columns).
         private int y;
 
-        public Game()
+        public Game(int width, string nameA, string nameB)
         {
-            Console.Write("Please enter a board width: ");
-            int size = int.Parse(Console.ReadLine());
+            //Sets the height/width of the board
+            this.x = this.y = width;
 
-            this.x = this.y = size;
+            //Creates a player object for each of the players, passing their name and the height/width given to initialize their
+            //respective boards.
+            CurrentPlayer = new Player(nameA, width);
+            NextPlayer = new Player(nameB, width);
 
-            Console.Write("Please provide name for player 1: ");
-            string nameA = Console.ReadLine();
+            Console.Clear();
 
-            Console.Write("Please provide name for player 2: ");
-            string nameB = Console.ReadLine();
-
-            Console.WriteLine();
-
-            playerA = new Player(nameA, size);
-            playerB = new Player(nameB, size);
+            // Initialize the player boards
+            InitializeGame();
 
         }
 
+        private void InitializeGame()
+        {
+            CurrentPlayer.InitializeBoard();
+            NextPlayer.InitializeBoard();
+        }
+
+        /*
+            Starts the game. For each turn, the "CurrentPlayer" picks out a coordinate to strike. The game then calls out the player's
+            opponent (i.e. the "NextPlayer") to call out if the the coordinate contains one of their pieces. If yes, then print out
+            "HIT !!!" and deduct a point from the opponent before starting the other player's turn. If no, then declare a miss, before
+            starting the other player's turn.
+        */
         public void Run()
         {
-            string input;
-            char[] coordinates;
-            int x;
-            int y;
+            // The player's input.
+            string? input;
+            // Coordinates derived from the player's input.
+            string[] coordinates;
+
+            //
+            int x = 0;
+            int y = 0;
             Player temp;
+
+            bool ValidInput = false;
+            bool exit = false;
 
             do
             {
-                PrintBoards();
-                Console.Write($"{playerA.name}, please give provide coordinates: ");
-                input = Console.ReadLine();
-                if (input != "exit")
+                Console.WriteLine(CurrentPlayer.PrintBoards());
+                do
                 {
+                    Console.Write($"{CurrentPlayer.Name}, please provide coordinates: ");
+                    input = Console.ReadLine();
                     try
                     {
-                        coordinates = input.ToCharArray();
-                        x = (int)char.GetNumericValue(coordinates[0]);
-                        y = (int)char.GetNumericValue(coordinates[coordinates.GetLength(0) - 1]);
-
-                        if (playerB.Hit(x, y))
+                        if (String.IsNullOrEmpty(input))
                         {
-                            Console.WriteLine("HIT !!!");
+                            throw new ArgumentException();
                         }
                         else
                         {
-                            Console.WriteLine("MISS !!!");
+                            if (input.ToLower() == "exit")
+                            {
+                                exit = true;
+                            }
+                            else
+                            {
+                                coordinates = input.Split(',');
+                                x = int.Parse(coordinates[0]);
+                                y = int.Parse(coordinates[1]);
+                            }
+                            ValidInput = true;
                         }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("INVALID INPUT: Try again!");
+                        Console.WriteLine("Invalid Input: Try Again !!!");
+                    }
+                } while (ValidInput != true);
+
+                if (exit != true)
+                {
+                    if (NextPlayer.Hit(x, y))
+                    {
+                        Console.WriteLine("HIT !!!");
+                        CurrentPlayer.OpponentBoard.SetCoord('X', x, y);
+                        NextPlayer.PlayerBoard.SetCoord('X', x, y);
+
+                        NextPlayer.HitPoints--;
+                    }
+                    else
+                    {
+                        Console.WriteLine("MISS !!!");
+                        CurrentPlayer.OpponentBoard.SetCoord('O', x, y);
+                    }
+
+                    if (NextPlayer.HitPoints == 0)
+                    {
+                        Console.WriteLine($"{CurrentPlayer.Name} has won !!!");
+                        Console.ReadLine();
+                        exit = true;
+                    }
+                    else
+                    {
+                        temp = CurrentPlayer;
+                        this.CurrentPlayer = this.NextPlayer;
+                        this.NextPlayer = temp;
+                        Console.ReadLine();
+                        Console.Clear();
                     }
                 }
-
-                temp = playerA;
-                this.playerA = this.playerB;
-                this.playerB = temp;
-
-            } while (input != "exit");
-
-        }
-
-        private void PrintBoards()
-        {
-
-            StringBuilder response = new StringBuilder();
-            response.Append(Header());
-            response.Append(GenerateDivider());
-
-            for (int i = 0; i < this.x; i++)
-            {
-                response.Append(playerA.actualBoard.GetRow(i));
-                response.Append("    |   ");
-                response.Append(playerB.visualBoard.GetRow(i));
-                response.Append("\n");
-                response.Append(GenerateDivider());
-            }
-
-            Console.WriteLine(response.ToString());
-        }
-
-        private string GenerateDivider()
-        {
-            string divider = "   ";
-            for (int i = 0; i < this.y; i++)
-            {
-                divider += "+ - ";
-            }
-
-            divider += "+    |   " + divider + "+" + "\n";
-            return divider;
-        }
-
-        private string Header()
-        {
-            string header = "   ";
-            for (int j = 0; j < this.y; j++)
-            {
-                header += $"  {j} ";
-            }
-            return header + "     |   " + header + "\n";
+            } while (exit != true);
         }
     }
 }

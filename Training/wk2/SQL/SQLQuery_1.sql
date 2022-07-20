@@ -283,3 +283,20 @@ GO
       ReqID INT NOT NULL
    )
 GO
+/*
+CREATE TABLE Students (
+   Id INT PRIMARY KEY,
+   Name NVARCHAR(255) NOT NULL,
+   Age INT NOT NULL,
+   Street NVARCHAR(255) NOT NULL,
+   City NVARCHAR(255) NOT NULL,
+   State NVARCHAR(255) NOT NULL,
+   Zip INT NOT NULL
+)
+
+
+*/
+
+SELECT * FROM Students;
+
+TRUNCATE Table Students;
