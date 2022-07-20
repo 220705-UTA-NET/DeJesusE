@@ -41,10 +41,10 @@ namespace Battleship
             // SetPiece(Pieces.Cruiser);
             // HitPoints += Pieces.Cruiser.Size;
 
-            // Place the player's submarine on the board
-            // Console.WriteLine(PrintBoard());
-            // SetPiece(Pieces.Submarine);
-            // HitPoints += Pieces.Submarine.Size;
+            //Place the player's submarine on the board
+            Console.WriteLine(PrintBoard());
+            SetPiece(Pieces.Submarine);
+            HitPoints += Pieces.Submarine.Size;
 
             // Place the player's destroyer on the board
             Console.WriteLine(PrintBoard());

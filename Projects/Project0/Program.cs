@@ -32,11 +32,11 @@ namespace Battleship
                 {
                     if (int.TryParse(input, out size))
                     {
-                        if (size >= 0) ValidInput = true;
+                        if (size >= 10) ValidInput = true;
                     }
                 }
 
-                if (!ValidInput) Console.WriteLine("Please enter a valid number for height/width.");
+                if (!ValidInput) Console.WriteLine("Please enter a valid number for height/width that is greater than or equal to 10.");
             }
 
             ValidInput = false;
