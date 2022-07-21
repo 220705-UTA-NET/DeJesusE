@@ -2,10 +2,7 @@
 /*
 
 Sole purpose is to obtain the height/width of the board (For generating board objects which will be used in representing a game board) and the name
-of two players (For generating player objects representing those players)
-
-@author Ellery R. De Jesus
-@since 7/19/2022
+of two players (For generating player objects representing those players).
 */
 using System;
 namespace Battleship
@@ -26,7 +23,7 @@ namespace Battleship
             // Get the height/width of the board. Loop until a non-negative integer is provided.
             while (!ValidInput)
             {
-                Console.Write("Please enter a board height/width: ");
+                Console.Write("Please enter a positive number that is 10 or higher for board height/width: ");
                 input = Console.ReadLine();
                 if (!String.IsNullOrEmpty(input))
                 {

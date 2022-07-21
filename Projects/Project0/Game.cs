@@ -91,6 +91,7 @@ namespace Battleship
                                 coordinates = input.Split(',');
                                 x = int.Parse(coordinates[0]);
                                 y = int.Parse(coordinates[1]);
+                                if (x >= NextPlayer.PlayerBoard.Xsize || y >= NextPlayer.PlayerBoard.Ysize) throw new ArgumentException();
                             }
                             ValidInput = true;
                         }
@@ -101,10 +102,12 @@ namespace Battleship
                     }
                 } while (ValidInput != true);
 
-                // Checks to see if the player has given "exit". If not, then check coordinates on the
-                // opponent's board to see if they had a piece at the given location. If yes, then print
-                // a message notifying that and deduct a point from the opponent's hitpoints. If no, then
-                // print a message notifying the player that they had missed.
+                /*
+                Checks to see if the player has given "exit". If not, then check coordinates on the
+                opponent's board to see if they had a piece at the given location. If yes, then print
+                a message notifying that and deduct a point from the opponent's hitpoints. If no, then
+                print a message notifying the player that they had missed.
+                */
                 if (exit != true)
                 {
                     if (NextPlayer.Hit(x, y))
